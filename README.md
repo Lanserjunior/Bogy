@@ -1,57 +1,67 @@
-# Bogy  
-# Fibonacci Generator
+# Bogy
+## Fibonacci Generator
 
-## Beschreibung  
-Dieses Python-Programm berechnet die Fibonacci-Zahlen und zeigt sie je nach Benutzerwahl in verschiedenen Sprachen an. Es erlaubt dem Benutzer, eine beliebige Anzahl von Fibonacci-Zahlen zu berechnen und gibt die Ergebnisse übersichtlich aus. Das Programm unterstützt die folgenden Sprachen:
+### Beschreibung
+Dieses Python-Programm berechnet Fibonacci-Zahlen und zeigt sie je nach Benutzerauswahl in einer von fünf Sprachen an:
 
 - Deutsch  
 - Englisch  
 - Französisch  
 - Spanisch  
-- Galactic Basic (mit einem humorvollen Twist aus dem Star Wars-Universum)
+- Galactic Basic (humorvoll inspiriert von Star Wars)
 
-**Hinweis:** Du kannst das Programm erneut verwenden, ohne es zu schließen. Nach jeder Berechnung wirst du gefragt, ob du eine neue Berechnung starten oder die Sprache wechseln möchtest.  
-Zusätzlich kannst du durch Eingabe von `x` bei der Anzahl-Eingabe zur Sprachauswahl zurückkehren (nur möglich, solange keine gültige Eingabe gemacht wurde).
+Nach der Sprachauswahl kann der Benutzer eine natürliche Zahl zwischen **1 und 100** eingeben, um die entsprechende Anzahl an Fibonacci-Zahlen zu berechnen. Die Ausgabe enthält zusätzlich eine gerundete Darstellung der Zahlen mit Hilfe bekannter Zahleneinheiten.
 
-## Anforderungen  
+Es besteht die Möglichkeit, durch Eingabe von **'x'** im Berechnungsmenü zur Sprachauswahl zurückzukehren.
 
-- Python 3.x (Python 3.6 oder höher empfohlen)
+Am Ende jeder Berechnung kann entschieden werden, ob eine neue Berechnung gestartet werden soll.
 
-Das Programm funktioniert mit einer maximalen Anzahl von Fibonacci-Zahlen bis **100**, um die Leistung und Stabilität zu gewährleisten. Höhere Zahlen würden das Programm stark verlangsamen oder zum Absturz bringen.
+---
 
-## Installation und Nutzung  
+### Anforderungen
 
-1. **Code herunterladen:** Klone dieses Repository oder lade die Dateien herunter.  
+- **Python 3.6 oder höher**
 
-2. **Python installieren:** Falls noch nicht geschehen, stelle sicher, dass Python 3.x auf deinem Computer installiert ist. Du kannst Python [hier herunterladen](https://www.python.org/downloads/).  
+---
 
-3. **Programm ausführen:**  
-   - Öffne ein Terminal oder eine Kommandozeile.  
-   - Navigiere zum Ordner, in dem die Python-Datei gespeichert ist.  
-   - Gib den folgenden Befehl ein, um das Programm auszuführen:  
-     ```
+### Installation und Nutzung
+
+1. **Dateien herunterladen:** Lade den Programmcode herunter oder klone das Repository.
+2. **Python installieren:** Falls noch nicht installiert, lade Python von [python.org](https://www.python.org/downloads/) herunter.
+3. **Programm starten:**
+   - Öffne ein Terminal oder die Eingabeaufforderung.
+   - Navigiere in den Ordner mit der `.py`-Datei.
+   - Führe das Programm aus mit:
+     ```bash
      python fibonacci.py
      ```
 
-4. **Sprache auswählen:** Du wirst aufgefordert, eine Sprache auszuwählen (Deutsch, Englisch, Französisch, Spanisch oder Galactic Basic).  
+---
 
-5. **Anzahl eingeben:** Gib die Anzahl der Fibonacci-Zahlen ein, die du berechnen möchtest. Durch Eingabe von `x` kannst du zur Sprachauswahl zurückkehren.  
+### Bedienung
 
-6. **Ergebnisse:** Die berechneten Fibonacci-Zahlen werden in der gewählten Sprache angezeigt, jeweils mit einer groben Schätzung ihrer Größe in verständlicher Form (z. B. "~218.922 Billionen").  
+- Wähle eine Sprache über Eingabe von 1 bis 5.
+- Gib eine **natürliche Zahl zwischen 1 und 100** ein.
+- **Hinweis:** Durch Eingabe von **`x`** gelangst du zurück zur Sprachauswahl – jedoch nur solange noch keine andere Eingabe gemacht wurde.
+- Du wirst nach jeder Berechnung gefragt, ob du eine weitere durchführen möchtest.
 
-## Lizenz  
+---
 
-Copyright (c) 2025 Felix Lanser. Alle Rechte vorbehalten.  
-Die Nutzung des Programms ist ausschließlich für den privaten Gebrauch gestattet. Kommerzielle Verwendung oder Weiterverbreitung ohne ausdrückliche Erlaubnis ist nicht gestattet.  
+### Besondere Hinweise
 
-## Warnung  
+- **Falscheingaben** bei Sprache, Zahl oder Wiederholungsabfrage führen zu mehrsprachigen Fehlermeldungen.
+- Die Sprache **Galactic Basic** basiert humorvoll auf Jabbas Sprache aus Star Wars und dient rein der Unterhaltung. Es handelt sich um keine offiziell definierte Sprache – Fehler oder Inkonsistenzen sind gewollt.
+- Alle großen Zahlen werden automatisch gerundet und mit Einheiten wie „Million“, „Trillion“, „Quadrilliarde“ usw. (abhängig von der gewählten Sprache) versehen.
 
-**Achtung:**  
-- Das Programm ist auf maximal **100 Fibonacci-Zahlen** beschränkt.  
-- Höhere Eingaben führen zu einer Fehlermeldung.  
-- Bei Eingabe ungültiger Sprach- oder Zahlenauswahlen erscheint eine mehrsprachige Fehlermeldung.  
-- Die Sprache **Galactic Basic** basiert auf der fiktiven Sprache von Jabba dem Hutten. Sie dient ausschließlich der Belustigung. Fehler in Ausdruck oder Zahlenbenennung sind gewollt und bewusst humorvoll gestaltet.
+---
 
-## Autor  
+### Lizenz
+
+**Copyright © 2025 Felix Lanser. Alle Rechte vorbehalten.**  
+Die Nutzung ist ausschließlich zu privaten Zwecken gestattet. Eine kommerzielle Nutzung oder Weitergabe des Programmcodes bedarf der schriftlichen Genehmigung des Autors.
+
+---
+
+### Autor
 
 Felix Lanser
