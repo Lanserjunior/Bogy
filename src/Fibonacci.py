@@ -1,147 +1,147 @@
 # -*- coding: utf-8 -*-
-# -----------------------------------------------------------------------
-# Created on Tue Apr 29 06:50:38 2025
-# @author: Felix Lanser
+# --------------------------------------------------
+# Created on: Tue Apr 29 2025
+# Author: Felix Lanser
 # Copyright (c) 2025 Felix Lanser. All rights reserved.
-# -----------------------------------------------------------------------
+# --------------------------------------------------
 
-# This program calculates Fibonacci numbers with optional rounding.
-# Please restart the program after each complete run.
-# ⚠️ MAXIMUM: You can calculate up to 100 Fibonacci numbers.
-# ℹ️ Press 'x' during number input to return to language selection.
+# This program calculates Fibonacci numbers in various languages.
+# Max allowed: 100 numbers. You can return to language menu by typing 'x'.
 
-# Select your language / Choisissez votre langue / Seleccione su idioma / Wähle deine Sprache / Poy ooma uma?
-print("------------------------------------------------------------")
-print("Bitte wähle eine Sprache / Please select a language / Veuillez choisir une langue / Selecciona un idioma / Poy ooma uma?")
-print("1 = Deutsch | 2 = English | 3 = Français | 4 = Español | 5 = Galactic Basic (Star Wars)")
-print("------------------------------------------------------------")
+import sys
 
-# Define language strings
-language_strings = {
-    "de": {
-        "lang_name": "Deutsch",
-        "invalid": "Ungültige Eingabe! Bitte gib eine Zahl zwischen 1 und 100 ein.",
-        "limit_warn": "⚠️ Zu hohe Werte können das Programm stark verlangsamen!",
-        "max_info": "Du kannst maximal 100 Fibonacci-Zahlen berechnen.",
-        "how_many": "Wie viele Fibonacci-Zahlen sollen berechnet werden (max. 100)? (x = zurück): ",
-        "result": "Fibonacci-Zahlen:",
-        "approx": "ungefähr",
-        "again": "Möchtest du noch einmal berechnen? (ja/nein): ",
-        "goodbye": "Auf Wiedersehen!",
-        "gb_warning": "Galactic Basic ist eine fiktive Sprache aus Star Wars und dient nur zur Unterhaltung. Fehler sind möglich.",
-        "x_hint": "Du kannst jederzeit 'x' eingeben, um zur Sprachauswahl zurückzukehren.",
-        "invalid_lang": "Ungültige Spracheingabe. Sprache wurde auf Deutsch gesetzt."
+# Language dictionaries
+languages = {
+    "1": "Deutsch",
+    "2": "English",
+    "3": "Français",
+    "4": "Español",
+    "5": "Galactic Basic"
+}
+
+# Messages in different languages
+messages = {
+    "choose_language": {
+        "1": "Bitte wähle eine Sprache (1=Deutsch, 2=Englisch, 3=Französisch, 4=Spanisch, 5=Galactic Basic): ",
+        "2": "Please choose a language (1=German, 2=English, 3=French, 4=Spanish, 5=Galactic Basic): ",
+        "3": "Veuillez choisir une langue (1=Allemand, 2=Anglais, 3=Français, 4=Espagnol, 5=Galactic Basic): ",
+        "4": "Por favor, elige un idioma (1=Alemán, 2=Inglés, 3=Francés, 4=Español, 5=Galactic Basic): ",
+        "5": "Ootmanchoo peekpa peetee (1=Doytcha, 2=Basic, 3=Fronk, 4=Espanyola, 5=GB): "
     },
-    "en": {
-        "lang_name": "English",
-        "invalid": "Invalid input! Please enter a number between 1 and 100.",
-        "limit_warn": "⚠️ High values can slow down the program!",
-        "max_info": "You can calculate up to 100 Fibonacci numbers.",
-        "how_many": "How many Fibonacci numbers should be calculated (max. 100)? (x = back): ",
-        "result": "Fibonacci numbers:",
-        "approx": "approx.",
-        "again": "Do you want to calculate again? (yes/no): ",
-        "goodbye": "Goodbye!",
-        "gb_warning": "Galactic Basic is a fictional language from Star Wars and only for fun. Errors may occur.",
-        "x_hint": "You can always type 'x' to return to language selection.",
-        "invalid_lang": "Invalid language choice. Defaulting to English."
+    "invalid_language": {
+        "1": "Ungültige Auswahl. Bitte wähle eine Zahl zwischen 1 und 5.",
+        "2": "Invalid selection. Please choose a number between 1 and 5.",
+        "3": "Sélection invalide. Choisissez un chiffre entre 1 et 5.",
+        "4": "Selección inválida. Elige un número del 1 al 5.",
+        "5": "Mochabba! No goota. Choosa one-of-five o wan wanga."
     },
-    "fr": {
-        "lang_name": "Français",
-        "invalid": "Entrée invalide ! Veuillez entrer un nombre entre 1 et 100.",
-        "limit_warn": "⚠️ Des valeurs trop élevées peuvent ralentir le programme !",
-        "max_info": "Vous pouvez calculer jusqu'à 100 nombres de Fibonacci.",
-        "how_many": "Combien de nombres de Fibonacci faut-il calculer (max. 100) ? (x = retour) : ",
-        "result": "Nombres de Fibonacci :",
-        "approx": "environ",
-        "again": "Voulez-vous recommencer ? (oui/non) : ",
-        "goodbye": "Au revoir !",
-        "gb_warning": "Galactic Basic est une langue fictive de Star Wars utilisée uniquement pour le plaisir. Des erreurs peuvent se produire.",
-        "x_hint": "Tapez 'x' à tout moment pour revenir à la sélection de la langue.",
-        "invalid_lang": "Choix de langue invalide. Français sélectionné par défaut."
+    "input_info": {
+        "1": "Bitte gib eine natürliche Zahl zwischen 1 und 100 ein (oder 'x' zum Sprachmenü): ",
+        "2": "Please enter a natural number between 1 and 100 (or 'x' to go back): ",
+        "3": "Veuillez entrer un nombre naturel entre 1 et 100 (ou 'x' pour revenir): ",
+        "4": "Por favor, introduce un número natural entre 1 y 100 (o 'x' para volver): ",
+        "5": "Noba jujum 1-100, or type 'x' bakawan: "
     },
-    "es": {
-        "lang_name": "Español",
-        "invalid": "¡Entrada inválida! Ingresa un número entre 1 y 100.",
-        "limit_warn": "⚠️ Valores altos pueden ralentizar el programa.",
-        "max_info": "Puedes calcular hasta 100 números de Fibonacci.",
-        "how_many": "¿Cuántos números de Fibonacci quieres calcular (máx. 100)? (x = volver): ",
-        "result": "Números de Fibonacci:",
-        "approx": "aprox.",
-        "again": "¿Quieres calcular otra vez? (sí/no): ",
-        "goodbye": "¡Adiós!",
-        "gb_warning": "Galactic Basic es un idioma ficticio de Star Wars, solo con fines de entretenimiento. Pueden ocurrir errores.",
-        "x_hint": "Puedes escribir 'x' en cualquier momento para volver al menú de idioma.",
-        "invalid_lang": "Idioma no válido. Español seleccionado por defecto."
+    "invalid_number": {
+        "1": "Ungültige Eingabe. Nur natürliche Zahlen zwischen 1 und 100 erlaubt.",
+        "2": "Invalid input. Only natural numbers between 1 and 100 allowed.",
+        "3": "Entrée invalide. Seuls les nombres naturels entre 1 et 100 sont autorisés.",
+        "4": "Entrada inválida. Solo se permiten números naturales entre 1 y 100.",
+        "5": "Mee choppa! Only 1-100 jujums valid."
     },
-    "gb": {
-        "lang_name": "Galactic Basic",
-        "invalid": "Jee oto bah! Wanga numba 1 en 100!",
-        "limit_warn": "⚠️ Too moocha peedoo... system go slooooow!",
-        "max_info": "You maxee 100 fibo-numba calculate.",
-        "how_many": "How many Fibo-numba you want? (x = backa) : ",
-        "result": "Fibo-numba list:",
-        "approx": "likee",
-        "again": "One more timeee? (yes/no): ",
-        "goodbye": "Bye bye!",
-        "gb_warning": "Galactic Basic is-a Star Wars fun speaky! Mistake happen, okieday?",
-        "x_hint": "You say 'x', you go back menu, huh.",
-        "invalid_lang": "No speaka that lang. Using Galactic Basic."
+    "try_again": {
+        "1": "Möchtest du eine weitere Berechnung durchführen? (ja/nein): ",
+        "2": "Would you like to calculate again? (yes/no): ",
+        "3": "Voulez-vous refaire un calcul ? (oui/non): ",
+        "4": "¿Quieres hacer otro cálculo? (sí/no): ",
+        "5": "Moocha do it again? (yes/no): "
+    },
+    "invalid_answer": {
+        "1": "Ungültige Antwort. Bitte 'ja' oder 'nein' eingeben.",
+        "2": "Invalid answer. Please enter 'yes' or 'no'.",
+        "3": "Réponse invalide. Veuillez taper 'oui' ou 'non'.",
+        "4": "Respuesta inválida. Escribe 'sí' o 'no'.",
+        "5": "Nogga right. Say 'yes' o 'no'."
+    },
+    "exit": {
+        "1": "Programm beendet.",
+        "2": "Program exited.",
+        "3": "Programme terminé.",
+        "4": "Programa terminado.",
+        "5": "Wanga done."
     }
 }
 
-# Choose language
-lang_code = input("→ Auswahl: ").strip()
-lang_map = {"1": "de", "2": "en", "3": "fr", "4": "es", "5": "gb"}
-lang = lang_map.get(lang_code, "de")
-msg = language_strings.get(lang, language_strings["de"])
+# Number system for rounding
+number_units = {
+    "1": [("Quadrilliarde", 10**27), ("Quadrillion", 10**24), ("Trilliarde", 10**21), ("Trillion", 10**18),
+          ("Billiarde", 10**15), ("Billion", 10**12), ("Milliarde", 10**9), ("Million", 10**6), ("Tausend", 10**3)],
+    "2": [("Octillion", 10**27), ("Septillion", 10**24), ("Sextillion", 10**21), ("Quintillion", 10**18),
+          ("Quadrillion", 10**15), ("Trillion", 10**12), ("Billion", 10**9), ("Million", 10**6), ("Thousand", 10**3)],
+    "3": [("Quadrilliard", 10**27), ("Quadrillion", 10**24), ("Trilliard", 10**21), ("Trillion", 10**18),
+          ("Billiard", 10**15), ("Billion", 10**12), ("Milliard", 10**9), ("Million", 10**6), ("Mille", 10**3)],
+    "4": [("Cuatrillardo", 10**27), ("Cuatrillón", 10**24), ("Trillardo", 10**21), ("Trillón", 10**18),
+          ("Billardo", 10**15), ("Billón", 10**12), ("Mil millones", 10**9), ("Millón", 10**6), ("Mil", 10**3)],
+    "5": [("Duggamill", 10**27), ("Jabbillion", 10**24), ("Biggaboom", 10**21), ("Banthillion", 10**18),
+          ("Rancillarde", 10**15), ("Sarlaccilliarde", 10**12), ("Yaddleon", 10**9), ("Yodillion", 10**6), ("Wookiee", 10**3)]
+}
 
-# Show GB warning if needed
-if lang == "gb":
-    print(msg["gb_warning"])
+def choose_language():
+    while True:
+        lang = input(messages["choose_language"]["2"])
+        if lang in languages:
+            print(f"Language set to: {languages[lang]}\n")
+            return lang
+        else:
+            for msg in messages["invalid_language"].values():
+                print(msg)
 
-# Show limit and restart warnings clearly
-print("=" * 60)
-print("🔁 " + msg["x_hint"])
-print("🚨 " + msg["limit_warn"])
-print("📌 " + msg["max_info"])
-print("🔁 Please restart the program after use.")
-print("=" * 60)
+def get_count(lang):
+    while True:
+        entry = input(messages["input_info"][lang])
+        if entry.lower() == 'x':
+            return 'x'
+        if entry.isdigit():
+            count = int(entry)
+            if 1 <= count <= 100:
+                return count
+        print(messages["invalid_number"][lang])
 
-# Function to calculate Fibonacci numbers
-def get_fibonacci(n):
-    fib = [1, 1]
+def fibonacci(n):
+    fibs = [0, 1]
     for _ in range(2, n):
-        fib.append(fib[-1] + fib[-2])
-    return fib[:n]
+        fibs.append(fibs[-1] + fibs[-2])
+    return fibs[:n]
 
-# Function to round large numbers (German scale)
-def round_number(n, lang):
-    units = [("Quadrilliarden", 10**27), ("Trilliarden", 10**21), ("Billiarden", 10**15), ("Milliarden", 10**9), ("Millionen", 10**6), ("Tausend", 10**3)]
-    en_units = [("quadrillion", 10**15), ("trillion", 10**12), ("billion", 10**9), ("million", 10**6), ("thousand", 10**3)]
-    for name, value in (units if lang in ["de", "fr", "es", "gb"] else en_units):
-        if n >= value:
-            return f"~{n // value}.{(n % value) // (value // 10)} {name}"
-    return str(n)
+def format_number(num, lang):
+    for name, value in number_units[lang]:
+        if num >= value:
+            return f"~{format(num / value, ',.3f').replace(',', '.')} {name}"
+    return str(num)
 
-# Loop to allow repeat
-while True:
-    count = input(msg["how_many"]).strip()
-    if count.lower() == "x":
-        exec(open(__file__).read())  # Restart program (not ideal in all editors)
-        break
-    if not count.isdigit() or int(count) < 1 or int(count) > 100:
-        print(msg["invalid"])
-        continue
-    count = int(count)
-    fibs = get_fibonacci(count)
+def main():
+    while True:
+        print("Note: You can return to this menu by entering 'x' before calculation.\n")
+        lang = choose_language()
+        while True:
+            count = get_count(lang)
+            if count == 'x':
+                break
+            fibs = fibonacci(count)
+            print("\nFibonacci-Zahlen:\n")
+            for i, num in enumerate(fibs):
+                num_str = f"{num:,}".replace(",", ".")
+                rounded = format_number(num, lang)
+                print(f"{i+1}: {num_str} ({rounded})")
+            while True:
+                again = input(messages["try_again"][lang]).strip().lower()
+                if again in ['ja', 'yes', 'oui', 'sí', 'si']:
+                    break
+                elif again in ['nein', 'no', 'non']:
+                    print(messages["exit"][lang])
+                    sys.exit()
+                else:
+                    print(messages["invalid_answer"][lang])
 
-    print(msg["result"])
-    for i, num in enumerate(fibs, start=1):
-        formatted = f"{num:,}".replace(",", ".")  # dot separator
-        print(f"{i}: {formatted} ({msg['approx']} {round_number(num, lang)})")
-
-    again = input(msg["again"]).strip().lower()
-    if again not in ["ja", "yes", "oui", "sí", "si"]:
-        print(msg["goodbye"])
-        break
+if __name__ == "__main__":
+    main()
