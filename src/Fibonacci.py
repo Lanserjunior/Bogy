@@ -11,7 +11,7 @@ def fibonacci(n):
 
 def language_selection():
     print("=" * 60)
-    print("Version 1.0.0")
+    print("Version 3.0.1")
     print("Copyright (c) 2025 Felix Lanser. Alle Rechte vorbehalten.")
     print("=" * 60)
     print()
