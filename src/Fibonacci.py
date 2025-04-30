@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
-#"""
-#Created on Tue Apr 29 06:50:38 2025
+from decimal import Decimal, getcontext
 
-#@author: Felix Lanser
-#"""
-#-----------------------------------------------------------------------
+# Setzen des Kontexts auf hohe Genauigkeit, z.B. 100 Dezimalstellen
+getcontext().prec = 100
 
 def fibonacci(n):
     fibo_list = [0, 1]
@@ -14,7 +11,7 @@ def fibonacci(n):
 
 def language_selection():
     print("=" * 60)
-    print("Version 2.1.0")
+    print("Version 1.0.0")
     print("Copyright (c) 2025 Felix Lanser. Alle Rechte vorbehalten.")
     print("=" * 60)
     print()
@@ -43,19 +40,24 @@ def language_selection():
 def print_language_hints(language):
     hints = {
         "de": [
-            "Du kannst auch 'x' drücken, um zur Sprachauswahl zurückzukehren."
+            "Du kannst auch 'x' drücken, um zur Sprachauswahl zurückzukehren.",
+            "Hinweis: Sehr große Zahlen (über 80) können dein System verlangsamen."
         ],
         "en": [
-            "You can also press 'x' to return to the language selection."
+            "You can also press 'x' to return to the language selection.",
+            "Note: Very large numbers (above 80) may slow down your system."
         ],
         "fr": [
-            "Vous pouvez également appuyer sur 'x' pour revenir au choix de la langue."
+            "Vous pouvez également appuyer sur 'x' pour revenir au choix de la langue.",
+            "Remarque : des nombres très grands (au-dessus de 80) peuvent ralentir votre système."
         ],
         "es": [
-            "También puedes pulsar 'x' para volver a la selección de idioma."
+            "También puedes pulsar 'x' para volver a la selección de idioma.",
+            "Nota: los números muy grandes (más de 80) pueden ralentizar tu sistema."
         ],
         "gb": [
-            "Press 'x' to go back to da language menu, yo."
+            "Press 'x' to go back to da language menu, yo.",
+            "Big numbas (like over 80) might slow ya down, bruv."
         ]
     }
     print()
@@ -65,52 +67,55 @@ def print_language_hints(language):
 
 def get_number(language):
     messages = {
-        "de": "Wie viele Fibonacci-Zahlen möchtest du berechnen? (0-100): ",
-        "en": "How many Fibonacci numbers would you like to calculate? (0-100): ",
-        "fr": "Combien de nombres de Fibonacci voulez-vous calculer ? (0-100): ",
-        "es": "¿Cuántos números de Fibonacci te gustaría calcular? (0-100): ",
-        "gb": "How many da Fibonacci numbas ya wanna see? (0-100): "
+        "de": "Wie viele Fibonacci-Zahlen möchtest du berechnen? (1–100): ",
+        "en": "How many Fibonacci numbers would you like to calculate? (1–100): ",
+        "fr": "Combien de nombres de Fibonacci voulez-vous calculer ? (1–100): ",
+        "es": "¿Cuántos números de Fibonacci te gustaría calcular? (1–100): ",
+        "gb": "How many da Fibonacci numbas ya wanna see? (1–100): "
     }
     error = {
-        "de": "Ungültige Eingabe. Bitte gib eine natürliche Zahl zwischen 0 und 100 ein.",
-        "en": "Invalid input. Please enter a natural number between 0 and 100.",
-        "fr": "Entrée invalide. Veuillez entrer un nombre naturel entre 0 et 100.",
-        "es": "Entrada no válida. Introduce un número natural entre 0 y 100.",
-        "gb": "That ain't right. Gimme a natural numba from 0 to 100, bro."
+        "de": "Ungültige Eingabe. Bitte gib eine natürliche Zahl zwischen 1 und 100 ein.",
+        "en": "Invalid input. Please enter a natural number between 1 and 100.",
+        "fr": "Entrée invalide. Veuillez entrer un nombre naturel entre 1 et 100.",
+        "es": "Entrada no válida. Introduce un número natural entre 1 y 100.",
+        "gb": "That ain't right. Gimme a numba from 1 to 100, bruv."
     }
     while True:
         val = input(messages[language]).strip().lower()
         if val == "x":
             return "x"
-        val = val.strip()
         if val.isdigit():
             num = int(val)
-            if 0 <= num <= 100:
+            if 1 <= num <= 100:
                 return num
         print(error[language])
 
+def format_number_localized(number, language):
+    """Sprachabhängige Formatierung von Dezimalzahlen."""
+    if language in ["de", "fr", "es"]:
+        return str(f"{number:,.2f}").replace(",", "X").replace(".", ",").replace("X", ".")
+    else:
+        return f"{number:,.2f}"
+
 def round_fibonacci_number(num, language):
-    thresholds = [10**6, 10**9, 10**12, 10**15, 10**18]
     suffixes = {
-        "de": ["Millionen", "Milliarden", "Billionen", "Billiarden", "Trillionen"],
-        "fr": ["millions", "milliards", "billions", "billiards", "trillions"],
-        "es": ["millones", "mil millones", "billones", "mil billones", "trillones"],
-        "en": ["million", "billion", "trillion", "quadrillion", "quintillion"],
-        "gb": ["millya", "billya", "trillya", "quadrillya", "quintillya"]
+        "de": ["", "Millionen", "Milliarden", "Billionen", "Billiarden", "Trillionen"],
+        "en": ["", "million", "billion", "trillion", "quadrillion", "quintillion"],
+        "fr": ["", "millions", "milliards", "billions", "billiards", "trillions"],
+        "es": ["", "millones", "mil millones", "billones", "mil billones", "trillones"],
+        "gb": ["", "millya", "billya", "trillya", "quadya", "quintya"]
     }
 
-    for i in reversed(range(len(thresholds))):
-        if num >= thresholds[i]:
-            divided = num / thresholds[i]
-            rounded = round(divided, 2)
-            if language == "de":
-                formatted = str(rounded).replace('.', ',')
-            else:
-                formatted = str(rounded)
-            return f"{formatted} {suffixes[language][i]}"
-    
-    formatted = str(round(num, 2)).replace('.', ',') if language == "de" else str(round(num, 2))
-    return formatted
+    if num < 1_000_000:
+        return format_number_localized(num, language)
+    else:
+        magnitude = 0
+        while num >= 1000 and magnitude < len(suffixes[language]) - 1:
+            num /= 1000
+            magnitude += 1
+        # Verwende Decimal, um mehr Präzision zu erhalten
+        rounded = Decimal(num).quantize(Decimal('0.01'))  # Rundet auf 2 Dezimalstellen
+        return f"{format_number_localized(rounded, language)} {suffixes[language][magnitude]}"
 
 def show_fibonacci(fibo_list, language):
     print("\nFibonacci Numbers:")
