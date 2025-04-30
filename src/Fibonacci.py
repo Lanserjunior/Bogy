@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 #"""
 #Created on Tue Apr 29 06:50:38 2025
+
 #@author: Felix Lanser
 #"""
+#-----------------------------------------------------------------------
 
 def fibonacci(n):
     fibo_list = [0, 1]
@@ -12,7 +14,7 @@ def fibonacci(n):
 
 def language_selection():
     print("=" * 60)
-    print("Version 2.0.0")
+    print("Version 2.1.0")
     print("Copyright (c) 2025 Felix Lanser. Alle Rechte vorbehalten.")
     print("=" * 60)
     print()
@@ -40,11 +42,21 @@ def language_selection():
 
 def print_language_hints(language):
     hints = {
-        "de": ["Du kannst auch 'x' drücken, um zur Sprachauswahl zurückzukehren."],
-        "en": ["You can also press 'x' to return to the language selection."],
-        "fr": ["Vous pouvez également appuyer sur 'x' pour revenir au choix de la langue."],
-        "es": ["También puedes pulsar 'x' para volver a la selección de idioma."],
-        "gb": ["Press 'x' to go back to da language menu, yo."]
+        "de": [
+            "Du kannst auch 'x' drücken, um zur Sprachauswahl zurückzukehren."
+        ],
+        "en": [
+            "You can also press 'x' to return to the language selection."
+        ],
+        "fr": [
+            "Vous pouvez également appuyer sur 'x' pour revenir au choix de la langue."
+        ],
+        "es": [
+            "También puedes pulsar 'x' para volver a la selección de idioma."
+        ],
+        "gb": [
+            "Press 'x' to go back to da language menu, yo."
+        ]
     }
     print()
     for line in hints[language]:
@@ -70,6 +82,7 @@ def get_number(language):
         val = input(messages[language]).strip().lower()
         if val == "x":
             return "x"
+        val = val.strip()
         if val.isdigit():
             num = int(val)
             if 0 <= num <= 100:
@@ -77,28 +90,30 @@ def get_number(language):
         print(error[language])
 
 def round_fibonacci_number(num, language):
+    thresholds = [10**6, 10**9, 10**12, 10**15, 10**18]
     suffixes = {
         "de": ["Millionen", "Milliarden", "Billionen", "Billiarden", "Trillionen"],
-        "en": ["million", "billion", "trillion"],
-        "fr": ["millions", "milliards", "billions", "trillions"],
-        "es": ["millones", "mil millones", "billones", "trillones"],
-        "gb": ["millya", "billya", "trillya"]
+        "fr": ["millions", "milliards", "billions", "billiards", "trillions"],
+        "es": ["millones", "mil millones", "billones", "mil billones", "trillones"],
+        "en": ["million", "billion", "trillion", "quadrillion", "quintillion"],
+        "gb": ["millya", "billya", "trillya", "quadrillya", "quintillya"]
     }
 
-    if num < 1_000_000:
-        return f"{num:.2f}"
-
-    magnitude = 0
-    num = num / 1_000_000  # Start ab Millionen
-    while num >= 1000 and magnitude < len(suffixes[language]) - 1:
-        num /= 1000
-        magnitude += 1
-
-    rounded = round(num, 2)
-    return f"{rounded:.2f} {suffixes[language][magnitude]}"
+    for i in reversed(range(len(thresholds))):
+        if num >= thresholds[i]:
+            divided = num / thresholds[i]
+            rounded = round(divided, 2)
+            if language == "de":
+                formatted = str(rounded).replace('.', ',')
+            else:
+                formatted = str(rounded)
+            return f"{formatted} {suffixes[language][i]}"
+    
+    formatted = str(round(num, 2)).replace('.', ',') if language == "de" else str(round(num, 2))
+    return formatted
 
 def show_fibonacci(fibo_list, language):
-    print("\nFibonacci Numbers:\n")
+    print("\nFibonacci Numbers:")
     for i, num in enumerate(fibo_list):
         rounded_num = round_fibonacci_number(num, language)
         print(f"{i+1}. Fibonacci Number: {num} (~{rounded_num})")
