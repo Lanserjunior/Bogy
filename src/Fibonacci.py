@@ -1,8 +1,8 @@
 def show_header():
-    print("-" * 50)
+    print("=" * 50)
     print("© Felix Lanser, 2025")
-    print("Version: 3.3.0 FINAL")
-    print("-" * 50 + "\n")
+    print("Version: 3.3.0")
+    print("=" * 50 + "\n")
 
 def get_language_choice():
     print("Sprache auswählen / Select language / Sélectionner la langue / Seleccionar idioma / Aporte:")
