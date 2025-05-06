@@ -13,7 +13,7 @@ languages = {
     "1": ("Deutsch", {
         "prompt_number": "Wie viele Fibonacci-Zahlen möchtest du berechnen? (1-100): ",
         "prompt_again": "Möchtest du erneut berechnen? (J/N): ",
-        "invalid_number": "Ungültige Eingabe. Bitte gib eine natürliche Zahl zwischen 1 und 100 ein.",
+        "invalid_number": "Ungültige Eingabe. Bitte gib eine natürliche Zahl(ℕ) zwischen 1 und 100 ein.",
         "invalid_choice": "Ungültige Eingabe. Bitte gib J oder N ein.",
         "invalid_language": "Ungültige Auswahl. Bitte wähle eine Zahl zwischen 1 und 5.",
         "exit": "Programm beendet.",
@@ -27,7 +27,7 @@ languages = {
     "2": ("English", {
         "prompt_number": "How many Fibonacci numbers do you want to calculate? (1-100): ",
         "prompt_again": "Would you like to calculate again? (Y/N): ",
-        "invalid_number": "Invalid input. Please enter a natural number between 1 and 100.",
+        "invalid_number": "Invalid input. Please enter a natural number(ℕ) between 1 and 100.",
         "invalid_choice": "Invalid input. Please enter Y or N.",
         "invalid_language": "Invalid selection. Please choose a number between 1 and 5.",
         "exit": "Program exited.",
@@ -41,7 +41,7 @@ languages = {
     "3": ("Français", {
         "prompt_number": "Combien de nombres de Fibonacci voulez-vous calculer ? (1-100) : ",
         "prompt_again": "Voulez-vous recommencer ? (O/N) : ",
-        "invalid_number": "Entrée invalide. Veuillez entrer un nombre naturel entre 1 et 100.",
+        "invalid_number": "Entrée invalide. Veuillez entrer un nombre naturel(ℕ) entre 1 et 100.",
         "invalid_choice": "Entrée invalide. Veuillez entrer O ou N.",
         "invalid_language": "Sélection invalide. Choisissez un nombre entre 1 et 5.",
         "exit": "Programme terminé.",
@@ -55,7 +55,7 @@ languages = {
     "4": ("Español", {
         "prompt_number": "¿Cuántos números de Fibonacci quieres calcular? (1-100): ",
         "prompt_again": "¿Deseas calcular nuevamente? (S/N): ",
-        "invalid_number": "Entrada inválida. Por favor, introduce un número natural entre 1 y 100.",
+        "invalid_number": "Entrada inválida. Por favor, introduce un número natural(ℕ) entre 1 y 100.",
         "invalid_choice": "Entrada inválida. Por favor, introduce S o N.",
         "invalid_language": "Selección inválida. Elige un número entre 1 y 5.",
         "exit": "Programa terminado.",

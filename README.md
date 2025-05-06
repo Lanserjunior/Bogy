@@ -1,67 +1,79 @@
-# Bogy
-## Fibonacci Generator
+#  Fibonacci-Zahlen Rechner (Multilingual)
 
-### Beschreibung
-Dieses Python-Programm berechnet Fibonacci-Zahlen und zeigt sie je nach Benutzerauswahl in einer von fünf Sprachen an:
+Dieses Python-Tool berechnet die **Fibonacci-Folge** bis zu einer vom Benutzer gewählten Länge (max. 100) in **5 verschiedenen Sprachen** – inklusive grafischer Darstellung des **goldenen Schnitts** über die Quotienten der Fibonacci-Zahlen.
 
-- Deutsch  
-- Englisch  
-- Französisch  
-- Spanisch  
-- Galactic Basic (humorvoll inspiriert von Star Wars)
+## Inhaltsverzeichnis
 
-Nach der Sprachauswahl kann der Benutzer eine natürliche Zahl zwischen **1 und 100** eingeben, um die entsprechende Anzahl an Fibonacci-Zahlen zu berechnen. Die Ausgabe enthält zusätzlich eine gerundete Darstellung der Zahlen mit Hilfe bekannter Zahleneinheiten.
-
-Es besteht die Möglichkeit, durch Eingabe von **'x'** im Berechnungsmenü zur Sprachauswahl zurückzukehren.
-
-Am Ende jeder Berechnung kann entschieden werden, ob eine neue Berechnung gestartet werden soll.
+- [Fibonacci-Zahlen Rechner (Multilingual)](#fibonacci-zahlen-rechner-multilingual)
+  - [Inhaltsverzeichnis](#inhaltsverzeichnis)
+  - [Funktionen](#funktionen)
+  - [Voraussetzungen](#voraussetzungen)
+  - [Verwendung](#verwendung)
+  - [Fehlermeldungen oder besondere Hinweise](#fehlermeldungen-oder-besondere-hinweise)
+  - [Mitwirkende](#mitwirkende)
+  - [Autor](#autor)
 
 ---
 
-### Anforderungen
+##  Funktionen
 
-- **Python 3.6 oder höher**
-
----
-
-### Installation und Nutzung
-
-1. **Dateien herunterladen:** Lade den Programmcode herunter oder klone das Repository.
-2. **Python installieren:** Falls noch nicht installiert, lade Python von [python.org](https://www.python.org/downloads/) herunter.
-3. **Programm starten:**
-   - Öffne ein Terminal oder die Eingabeaufforderung.
-   - Navigiere in den Ordner mit der `.py`-Datei.
-   - Führe das Programm aus mit:
-     ```bash
-     python fibonacci.py
-     ```
+- Auswahl zwischen **5 Sprachen**:
+  - Deutsch
+  - Englisch
+  - Französisch
+  - Spanisch
+  - Galactic Basic (inspieriert von Star Wars)
+- Ausgabe der Fibonacci-Zahlen mit gerundeten Einheiten:
+  - z. B. `1.35 Million`, `2.50 Billion`, `1.13 Milliarde` 
+- Grafische Darstellung der Annäherung an den goldenen Schnitt
+- Rückkehr zur Sprachwahl oder sauberes Beenden
 
 ---
 
-### Bedienung
+##  Voraussetzungen
 
-- Wähle eine Sprache über Eingabe von 1 bis 5.
-- Gib eine **natürliche Zahl zwischen 1 und 100** ein.
-- **Hinweis:** Durch Eingabe von **`x`** gelangst du zurück zur Sprachauswahl – jedoch nur solange noch keine andere Eingabe gemacht wurde.
-- Du wirst nach jeder Berechnung gefragt, ob du eine weitere durchführen möchtest.
-
----
-
-### Besondere Hinweise
-
-- **Falscheingaben** bei Sprache, Zahl oder Wiederholungsabfrage führen zu mehrsprachigen Fehlermeldungen.
-- Die Sprache **Galactic Basic** basiert humorvoll auf Jabbas Sprache aus Star Wars und dient rein der Unterhaltung. Es handelt sich um keine offiziell definierte Sprache – Fehler oder Inkonsistenzen sind gewollt.
-- Alle großen Zahlen werden automatisch gerundet und mit Einheiten wie „Million“, „Trillion“, „Quadrilliarde“ usw. (abhängig von der gewählten Sprache) versehen.
+- Python 3.11
+- `matplotlib` installieren via
+- pip install matplotlib
+- funktionierender computer
 
 ---
 
-### Lizenz
+## Verwendung
 
-**Copyright © 2025 Felix Lanser. Alle Rechte vorbehalten.**  
-Die Nutzung ist ausschließlich zu privaten Zwecken gestattet. Eine kommerzielle Nutzung oder Weitergabe des Programmcodes bedarf der schriftlichen Genehmigung des Autors.
+- Starten des Programms in Spyder (**Python 3.11**)
+- Auswahl zwischen **5 Sprachen**:
+  - Deutsch
+  - Englisch
+  - Französisch
+  - Spanisch
+  - Galactic Basic (inspieriert von Star Wars)
+- Auswahl an zu berechnenden Fibonaccizahlen (1-100 Fibonaccizahlen)
+- Umschalten von dem Reiter "Help" zu dem Reiter "Plots"
+- Auswahl, ob man nun erneut Fibonaccizahlen berechnen möchte
+![Alternativtext](./screenshots/Figure%202025-05-06%20081130.png)
+- Der hier gezeigte Screenshot zeigt das enstandene Diagramm bis zu der 100.Fibonaccizahl
 
 ---
 
-### Autor
+## Fehlermeldungen oder besondere Hinweise
 
+- Bekannte Bugs und Probleme:
+  - Keine
+
+- besondere Hinweise:
+  - Das Programm kann maximal 100 Fibonaccizahlen berechnen
+  - Es können keine negativen Zahlen berechnet werden
+  - Es können keine Dezimalzahlen berechnet werden
+  - Es können nur natürliche Zahlen (ℕ) berechnet werden
+
+---
+
+## Mitwirkende
+- Jörg Lanser
+- ChatGPT
+
+---
+
+## Autor
 Felix Lanser
