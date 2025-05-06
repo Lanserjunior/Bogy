@@ -1,162 +1,164 @@
-def show_header():
-    print("=" * 50)
-    print("© Felix Lanser, 2025")
-    print("Version: 3.3.0")
-    print("=" * 50 + "\n")
+import sys
+import matplotlib.pyplot as plt  # Für die grafische Darstellung der Fibonacci-Verhältnisse
 
-def get_language_choice():
-    print("Sprache auswählen / Select language / Sélectionner la langue / Seleccionar idioma / Aporte:")
-    print("1: Deutsch")
-    print("2: English")
-    print("3: Français")
-    print("4: Español")
-    print("5: Huttese")
-    while True:
-        choice = input("Auswahl / Choice / Choix / Selección / Aporte: ").strip()
-        if choice in ("1", "2", "3", "4", "5"):
-            return int(choice)
-        else:
-            print("Ungültige Auswahl / Invalid choice / Choix invalide / Selección inválida / Wermo choffo.")
+# Copyright- und Versionsinfo beim Start
+print("=" * 50)
+print("© Felix Lanser, 2025")
+print("Version: 5.0.0")
+print("=" * 50 + "\n")
+print("1:Bitte wählen sie eine Sprache / 2:Please select a language / 3.Veuillez sélectionner une langue / 4.Por favor seleccione un idioma / 5.Braucha ein Sprachaa")
 
-LANGUAGES = {
-    1: {
-        "name": "Deutsch",
-        "prompt": "Wie viele Fibonacci-Zahlen möchtest du berechnen? (1-100): ",
-        "error": "Ungültige Eingabe. Bitte gib eine natürliche Zahl zwischen 1 und 100 ein.",
-        "warning": "Hinweis: Hohe Zahlen können die Leistung beeinträchtigen.",
-        "result": "Fibonacci-Zahlen:",
-        "approx": "(~{approx} {unit})",
-        "again": "Möchtest du erneut berechnen? (Ja/Nein): ",
-        "yes": "ja",
-        "no": "nein",
-        "repeat_error": "Ungültige Eingabe. Bitte nur ‚j‘ oder ‚n‘ eingeben.",
-        "special_42": "Die Antwort auf das Leben, das Universum und alles!"
-    },
-    2: {
-        "name": "English",
-        "prompt": "How many Fibonacci numbers would you like to calculate? (1-100): ",
-        "error": "Invalid input. Please enter a natural number between 1 and 100.",
-        "warning": "Note: High values may slow down the program.",
-        "result": "Fibonacci Numbers:",
-        "approx": "(~{approx} {unit})",
-        "again": "Would you like to calculate again? (Yes/No): ",
-        "yes": "yes",
-        "no": "no",
-        "repeat_error": "Invalid input. Please enter 'y' or 'n' only.",
-        "special_42": "The answer to life, the universe, and everything!"
-    },
-    3: {
-        "name": "Français",
-        "prompt": "Combien de nombres de Fibonacci souhaitez-vous calculer ? (1-100) : ",
-        "error": "Entrée invalide. Veuillez entrer un nombre naturel entre 1 et 100.",
-        "warning": "Remarque : Des valeurs élevées peuvent ralentir le programme.",
-        "result": "Nombres de Fibonacci :",
-        "approx": "(~{approx} {unit})",
-        "again": "Souhaitez-vous recommencer ? (Oui/Non) : ",
-        "yes": "oui",
-        "no": "non",
-        "repeat_error": "Entrée invalide. Veuillez saisir uniquement 'o' ou 'n'.",
-        "special_42": "La réponse à la vie, à l'univers et à tout le reste !"
-    },
-    4: {
-        "name": "Español",
-        "prompt": "¿Cuántos números de Fibonacci deseas calcular? (1-100): ",
-        "error": "Entrada no válida. Por favor, introduce un número natural entre 1 y 100.",
-        "warning": "Nota: Valores altos pueden ralentizar el programa.",
-        "result": "Números de Fibonacci:",
-        "approx": "(~{approx} {unit})",
-        "again": "¿Quieres calcular de nuevo? (Sí/No): ",
-        "yes": "sí",
-        "no": "no",
-        "repeat_error": "Entrada no válida. Por favor, introduce solo 's' o 'n'.",
-        "special_42": "¡La respuesta a la vida, el universo y todo lo demás!"
-    },
-    5: {
-        "name": "Huttese",
-        "prompt": "Peedunkee o wanna kee mombay m'bwa Fibonacci? (1-100): ",
-        "error": "Moolee ra. Jee oto kee mombay m'bwa 1 fa 100.",
-        "warning": "U wamma: Kee mombay spooko da naga mooie.",
-        "result": "Fibonacci mombay:",
-        "approx": "(~{approx} {unit})",
-        "again": "Tee uba reecalculate? (Yes/No): ",
-        "yes": "yes",
-        "no": "no",
-        "repeat_error": "Moolee ra. Soong peetchka 'y' walla 'n' soong peetchka.",
-        "special_42": "Da answer dee life, da universe en everyting!"
-    }
+# Sprachdaten: Jede Sprache hat Texte (Prompts, Fehlermeldungen usw.) + Einheiten für große Zahlen
+languages = {
+    "1": ("Deutsch", {
+        "prompt_number": "Wie viele Fibonacci-Zahlen möchtest du berechnen? (1-100): ",
+        "prompt_again": "Möchtest du erneut berechnen? (J/N): ",
+        "invalid_number": "Ungültige Eingabe. Bitte gib eine natürliche Zahl zwischen 1 und 100 ein.",
+        "invalid_choice": "Ungültige Eingabe. Bitte gib J oder N ein.",
+        "invalid_language": "Ungültige Auswahl. Bitte wähle eine Zahl zwischen 1 und 5.",
+        "exit": "Programm beendet.",
+        "back": "Zurück zur Sprachauswahl.",
+        "heading": "Fibonacci-Zahlen:",
+        "plot_title": "Fibonacci-Quotienten → Goldener Schnitt",
+        "plot_xlabel": "n (Folgeposition)",
+        "plot_ylabel": "f(n)/f(n-1)",
+    }, ["Million", "Milliarde", "Billion", "Billiarde", "Trillion"]),
+
+    "2": ("English", {
+        "prompt_number": "How many Fibonacci numbers do you want to calculate? (1-100): ",
+        "prompt_again": "Would you like to calculate again? (Y/N): ",
+        "invalid_number": "Invalid input. Please enter a natural number between 1 and 100.",
+        "invalid_choice": "Invalid input. Please enter Y or N.",
+        "invalid_language": "Invalid selection. Please choose a number between 1 and 5.",
+        "exit": "Program exited.",
+        "back": "Returning to language selection.",
+        "heading": "Fibonacci numbers:",
+        "plot_title": "Fibonacci Ratios → Golden Ratio",
+        "plot_xlabel": "n (sequence index)",
+        "plot_ylabel": "f(n)/f(n-1)",
+    }, ["million", "billion", "trillion", "quadrillion", "quintillion"]),
+
+    "3": ("Français", {
+        "prompt_number": "Combien de nombres de Fibonacci voulez-vous calculer ? (1-100) : ",
+        "prompt_again": "Voulez-vous recommencer ? (O/N) : ",
+        "invalid_number": "Entrée invalide. Veuillez entrer un nombre naturel entre 1 et 100.",
+        "invalid_choice": "Entrée invalide. Veuillez entrer O ou N.",
+        "invalid_language": "Sélection invalide. Choisissez un nombre entre 1 et 5.",
+        "exit": "Programme terminé.",
+        "back": "Retour à la sélection de langue.",
+        "heading": "Nombres de Fibonacci :",
+        "plot_title": "Rapports de Fibonacci → Nombre d'or",
+        "plot_xlabel": "n (rang de la suite)",
+        "plot_ylabel": "f(n)/f(n-1)",
+    }, ["million", "milliard", "billion", "billiard", "trillion"]),
+
+    "4": ("Español", {
+        "prompt_number": "¿Cuántos números de Fibonacci quieres calcular? (1-100): ",
+        "prompt_again": "¿Deseas calcular nuevamente? (S/N): ",
+        "invalid_number": "Entrada inválida. Por favor, introduce un número natural entre 1 y 100.",
+        "invalid_choice": "Entrada inválida. Por favor, introduce S o N.",
+        "invalid_language": "Selección inválida. Elige un número entre 1 y 5.",
+        "exit": "Programa terminado.",
+        "back": "Volviendo a la selección de idioma.",
+        "heading": "Números de Fibonacci:",
+        "plot_title": "Cocientes de Fibonacci → Número áureo",
+        "plot_xlabel": "n (posición en la secuencia)",
+        "plot_ylabel": "f(n)/f(n-1)",
+    }, ["millón", "mil millones", "billón", "mil billones", "trillón"]),
+
+    "5": ("Galactic Basic", {
+        "prompt_number": "How many Fibonacci digits do you seek, young padawan? (1-100): ",
+        "prompt_again": "Try again you must? (Y/N): ",
+        "invalid_number": "Wrong it is. Choose a natural number between 1 and 100.",
+        "invalid_choice": "Wrong choice. Say Y or N, or face the dark side.",
+        "invalid_language": "Invalid selection. Use the Force and choose 1-5.",
+        "exit": "May the Force be with you. Exiting...",
+        "back": "Back to galactic tongue selection.",
+        "heading": "Fibonacci holonumbers:",
+        "plot_title": "Fibonacci Ratios → Golden Holoratio",
+        "plot_xlabel": "n (sequence index)",
+        "plot_ylabel": "f(n)/f(n-1)",
+    }, ["megacredit", "gigacredit", "teracredit", "petacredit", "exacredit"]),
 }
 
-UNITS_SHORT_SCALE = [
-    (10**18, {"de": "Trillionen", "en": "quintillion"}),
-    (10**15, {"de": "Billiarden", "en": "quadrillion"}),
-    (10**12, {"de": "Billionen", "en": "trillion"}),
-    (10**9, {"de": "Milliarden", "en": "billion"}),
-    (10**6, {"de": "Millionen", "en": "million"})
-]
+# Wandelt große Zahlen in gerundete Einheiten (z. B. "1.23 Millionen") um
+def round_number(n, units):
+    if n < 1_000_000:
+        return str(n)
+    else:
+        powers = [1_000_000, 1_000_000_000, 1_000_000_000_000,
+                  1_000_000_000_000_000, 1_000_000_000_000_000_000]
+        for i, p in reversed(list(enumerate(powers))):
+            if n >= p:
+                return f"{n/p:.2f} {units[i]}"
+        return str(n)
 
-def format_number_with_unit(n, lang_id):
-    lang_key = "de" if lang_id == 1 else "en"
-    for threshold, unit_names in UNITS_SHORT_SCALE:
-        if n >= threshold:
-            short = round(n / threshold, 3)
-            if lang_id == 1:
-                return f"{short:.3f}".replace(".", ","), unit_names["de"]
-            else:
-                return f"{short:.3f}", unit_names["en"]
-    return None, None
-
-def get_number_input(lang):
-    while True:
-        user_input = input(lang["prompt"]).strip().lower()
-        if user_input == "42":
-            print("\n" + lang["special_42"] + "\n")
-            return None
-        try:
-            number = int(user_input)
-            if 1 <= number <= 100:
-                return number
-            else:
-                print(lang["error"])
-        except ValueError:
-            print(lang["error"])
-
+# Berechnet die Fibonacci-Zahlen bis zur n-ten Position
 def fibonacci(n):
+    if n == 42:
+        return "Die Antwort auf das Leben, das Universum und alles!"
     fibs = [0, 1]
     for _ in range(2, n):
         fibs.append(fibs[-1] + fibs[-2])
     return fibs[:n]
 
-def ask_to_repeat(lang):
-    while True:
-        answer = input("\n" + lang["again"]).strip().lower()
-        if answer.startswith(lang["yes"][0]):
-            return True
-        elif answer.startswith(lang["no"][0]):
-            return False
-        else:
-            print(lang["repeat_error"])
+# Erstellt eine Plot-Grafik der Quotienten f(n)/f(n-1)
+def plot_fibonacci_ratios(fibs, lang_data):
+    if isinstance(fibs, str): return
+    quotients = [fibs[i] / fibs[i-1] for i in range(2, len(fibs)) if fibs[i-1] != 0]
+    plt.plot(range(2, len(fibs)), quotients, marker='o')
+    plt.title(lang_data["plot_title"])
+    plt.xlabel(lang_data["plot_xlabel"])
+    plt.ylabel(lang_data["plot_ylabel"])
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
 
+# Hauptfunktion des Programms
 def main():
-    show_header()
     while True:
-        language_id = get_language_choice()
-        lang = LANGUAGES[language_id]
-        print("\n" + lang["warning"] + "\n")
-        while True:
-            number = get_number_input(lang)
-            if number is None:
-                break
-            fibs = fibonacci(number)
-            print("\n" + lang["result"])
-            for i, val in enumerate(fibs, 1):
-                approx, unit = format_number_with_unit(val, language_id)
-                if approx and unit:
-                    print(f"{i}. Fibonacci Number: {val} {lang['approx'].format(approx=approx, unit=unit)}")
-                else:
-                    print(f"{i}. Fibonacci Number: {val}")
-            if not ask_to_repeat(lang):
-                return
-            print()
+        for key, (name, _, _) in languages.items():
+            print(f"{key}: {name}")  # Sprachoption anzeigen
+        lang_choice = input("->").strip()
+        if lang_choice not in languages:
+            print("Ungültige Auswahl. Bitte wähle eine gültige Sprache.")
+            continue
 
+        lang_name, lang_data, units = languages[lang_choice]
+
+        while True:
+            num_input = input(lang_data['prompt_number']).strip()
+            if num_input.lower() == 'x':
+                print(lang_data['back'])
+                break
+            if not num_input.isdigit() or not (1 <= int(num_input) <= 100):
+                print(lang_data['invalid_number'])
+                continue
+            count = int(num_input)
+            result = fibonacci(count)
+            print("\n" + lang_data['heading'])
+
+            if isinstance(result, str):
+                print(result)
+            else:
+                for num in result:
+                    print(f"{num} ({round_number(num, units)})")  # Zeilenweise Ausgabe
+                # Die alte Komma-getrennte Ausgabe wurde entfernt
+
+                plot_fibonacci_ratios(result, lang_data)
+
+            while True:
+                again = input(lang_data['prompt_again']).strip().lower()
+                yes_char = lang_data['prompt_again'][lang_data['prompt_again'].find('(')+1].lower()
+                no_char = lang_data['prompt_again'][lang_data['prompt_again'].find('/')+1].lower()
+                if again == yes_char:
+                    break
+                elif again == no_char:
+                    print(lang_data['exit'])
+                    sys.exit()
+                else:
+                    print(lang_data['invalid_choice'])
+
+# Start des Programms
 if __name__ == "__main__":
     main()
