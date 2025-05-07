@@ -20,6 +20,8 @@ Dieses Pythonprogramm gibt nach dem Start das kleine ein mal eins tabellarisch a
 ## Verwendung
 - Starten des Programms
 - Zur Konsole schauen und lesen
+![](./screenshots/Screenshot%202025-05-07%20122104.png)
+- Hier ein Scrrenahot der erwähnter tabellarischen Darstellung
 
 ## Fehlermeldungen oder besondere Hinweise
 
@@ -31,5 +33,3 @@ Dieses Pythonprogramm gibt nach dem Start das kleine ein mal eins tabellarisch a
 
 ## Autor
 Felix Lanser 
-
-[def]: .
