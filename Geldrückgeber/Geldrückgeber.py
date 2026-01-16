@@ -1,6 +1,8 @@
 # Liste aller Noten, Euro in Cent
 geld_einheiten = [50000, 20000, 10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1]
 
+#--------------------------------------------------------------------------
+
 # Funktion zur Berechnung des Rückgelds
 def rueckgeld_berechnen(betrag):
     # Betrag wird in Cent umgewandelt; Cent ist Euro mal hundert
